@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>SPARTA HMIF 2016</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="manifest.json">
+<!-- SCRIPT -->
+   <script src="js/angular.min.js"></script>
+   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+</head>
+<body>
+<div class="bg-img"></div>
+<div class="web-form">
+	<div class="title-bar">
+  	<div class="title">
+    SPARTA HMIF 2016
+    </div>    
+    <div class="subtitle">
+    Daftar Hadir Kelompok
+    </div>
+  </div>
+  <div style="padding-top:20px; padding-left:10px; padding-right:8px;"><hr style="color:white; border:solid white 1px;"></div>
+	<div class="form-content" ng-app="absen" ng-controller="absenCtrl">
+  	<form id="formsparta" method="post" action="https://script.google.com/macros/s/AKfycbzc37G2thJQ1-sn--0V9wSRO5UVtYhRIBIXGZI5UkAiPHsHBZg/exec">
+  	<div class="input-2">
+    	<div class="user">
+      <div class="form-field">
+      	Mentor <span class="guide">(NIM)</span>
+      </div>
+      <div class="form-select">
+        <input type="text" id="user" name="user" pattern="(135|182)15([0-1][0-9][0-9]|4[0-1][0-9]|42[0-8])" oninvalid="this.setCustomValidity('Invalid NIM')" oninput="this.setCustomValidity('')" placeholder="NIM Mentor">
+      </div>
+      </div>
+      <div class="no-int">
+      <div class="form-field">
+      	No Interaksi
+      </div>
+      <div class="form-select">
+        <select id="interaksi" name="interaksi">
+          <option value="INTERAKSI01">Interaksi 1</option>
+          <option value="INTERAKSI02">Interaksi 2</option>
+          <option value="INTERAKSI03">Interaksi 3</option>
+        </select>
+      </div>
+      </div>
+      
+    </div>
+    <div class="input-1" ng-repeat="nim in nimList track by $index">
+    	<input name="nim-{{$index+1}}" class="nim" placeholder="add NIM" ng-model="nimList[$index]" ng-change="addNIM($index)" pattern="16516([0-3][0-9][0-9]|4[0-1][0-9]|42[0-8])" oninvalid="this.setCustomValidity('Invalid NIM')" oninput="this.setCustomValidity('')">
+		<div class="chck"><input type="checkbox" name="parsial-{{$index+1}}" name="parsial-{{$index+1}}" ng-model="parsial[$index]"></div>
+    	<input type="button" id="del" ng-click="deleteNIM($index)" value="x" tabindex="-1">
+    </div>
+    <div class="input-button"><input type="submit" value="Submit"></div>
+    </form>
+	<div id="thankyou" style="display:none; color:#FFF"> 
+		Input absensi berhasil!
+	</div>
+	<script data-cfasync="false" type="text/javascript" src="js/submit.js"></script>
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+	var app = angular.module('absen',[]);
+	app.controller('absenCtrl', function($scope){
+		$scope.linecount = 1;
+		$scope.nimList = [''];
+		$scope.parsial = [false];
+		
+		$scope.addNIM = function(index){
+			if(index == $scope.linecount-1){
+				$scope.nimList.push('');
+				$scope.parsial.push(false);
+				$scope.linecount++;
+			}
+		};
+		
+		$scope.deleteNIM = function(index){
+			if($scope.linecount > 1){
+				$scope.nimList.splice(index,1);
+				$scope.parsial.splice(index,1);
+				$scope.linecount--;
+			}
+		};	
+	});
+</script>
+<!-- SCRIPT END -->
+</body>
+</html>
