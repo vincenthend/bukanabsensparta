@@ -51,7 +51,7 @@
     </div>
     <div class="input-1" ng-repeat="nim in nimList track by $index">
     	<input name="nim-{{$index+1}}" class="nim" placeholder="add NIM" ng-model="nimList[$index]" ng-change="addNIM($index)" pattern="16516([0-3][0-9][0-9]|4[0-1][0-9]|42[0-8])" oninvalid="this.setCustomValidity('Invalid NIM')" oninput="this.setCustomValidity('')">
-		<div class="chck"><input type="checkbox" name="parsial-{{$index+1}}" name="parsial-{{$index+1}}" ng-model="parsial[$index]"></div>
+		<div class="chck"><input type="checkbox" name="parsial-{{$index+1}}" name="parsial-{{$index+1}}" ng-model="parsial[$index]" tabindex="-1"></div>
     	<input type="button" id="del" ng-click="deleteNIM($index)" value="x" tabindex="-1">
     </div>
     <div class="input-button"><input type="submit" value="Submit"></div>
