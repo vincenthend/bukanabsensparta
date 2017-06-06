@@ -72,7 +72,7 @@
 		$scope.parsial = [false];
 		
 		$scope.addNIM = function(index){
-			if($scope.linecount <= 16){
+			if($scope.linecount < 16){
 				if(index == $scope.linecount-1){
 					$scope.nimList.push('');
 					$scope.parsial.push(false);
